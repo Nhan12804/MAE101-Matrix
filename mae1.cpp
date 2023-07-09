@@ -60,55 +60,48 @@ void tichmatran(int a[][100], int b[][100], int c[][100], int m, int n, int p) {
 }
 
 void matrancheo(){
-    int rows, cols;
+    int n;
 
-   // Nhập số hàng và số cột của ma trận từ bàn phím
-    printf("Nhap so hang cua ma tran: ");
-    scanf("%d", &rows);
-    printf("Nhap so cot cua ma tran: ");
-    scanf("%d", &cols);
+    printf("Nhap so chieu cua ma tran: ");
+    scanf("%d", &n);
 
-    int matrix[rows][cols];
+    int A[n][n];
 
-   // Nhập ma trận từng phần tử từ bàn phím
-    printf("Nhap ma tran:\n");
-    for (int i = 0; i < rows; i++) {
-        for (int j = 0; j < cols; j++) {
-            printf("Nhap phan tu matrix[%d][%d]: ", i, j);
-            scanf("%d", &matrix[i][j]);
+    // Nhập giá trị cho ma trận A
+    printf("Nhap gia tri cho ma tran A:\n");
+    for (int i = 0; i < n; i++)
+    {
+        for (int j = 0; j < n; j++)
+        {
+            scanf("%d", &A[i][j]);
         }
     }
 
-   // In ma trận ban đầu
-    printf("Ma tran ban dau:\n");
-    for (int i = 0; i < rows; i++) {
-        for (int j = 0; j < cols; j++) {
-            printf("%d ", matrix[i][j]);
-        }
-        printf("\n");
-    }
-
-   // Chuyển đổi ma trận sang dạng chéo
-    for (int i = 0; i < rows; i++) {
-        for (int j = 0; j < cols; j++) {
-            if (i == j) {
-                continue; // Bỏ qua các phần tử trên đường chéo
+    // Chéo hoá ma trận A
+    for (int i = 0; i < n; i++)
+    {
+        for (int j = 0; j < n; j++)
+        {
+            if (i != j)
+            {
+                A[i][j] = 0;
             }
-            matrix[i][j] = 0;
         }
     }
 
-   // In ma trận đã chuyển đổi
-    printf("Ma tran chuyen doi:\n");
-    for (int i = 0; i < rows; i++) {
-        for (int j = 0; j < cols; j++) {
-            printf("%d ", matrix[i][j]);
+    // In ra ma trận A đã chéo hoá
+    printf("Ma tran A da cheo hoa:\n");
+    for (int i = 0; i < n; i++)
+    {
+        for (int j = 0; j < n; j++)
+        {
+            printf("%d ", A[i][j]);
         }
         printf("\n");
     }
 }
 
-int matrannghichdao(){
+void matrannghichdao(){
     int i,j,k,m,n,na;
     double det,x,tam;
     double a[10][10],b[10][10];
@@ -227,6 +220,7 @@ int matrannghichdao(){
     else printf("\n Khong co ma tran nghich dao.");
     getch();
 }
+#include <stdio.h>
 
 void swap_rows(float matrix[][100], int cols, int row1, int row2) {
     for (int j = 0; j < cols; j++) {
@@ -293,6 +287,35 @@ void print_solutions(float matrix[][100], int rows, int cols) {
     }
 }
 
+void call() {
+    int rows, cols;
+
+    printf("Enter the number of rows: ");
+    scanf("%d", &rows);
+
+    printf("Enter the number of columns: ");
+    scanf("%d", &cols);
+
+    float matrix[rows][100];
+
+    printf("Enter the matrix elements:\n");
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < cols; j++) {
+            scanf("%f", &matrix[i][j]);
+        }
+    }
+
+    printf("Original matrix:\n");
+    print_matrix(matrix, rows, cols);
+
+    reduce_to_echelon(matrix, rows, cols);
+
+    printf("Matrix in echelon form:\n");
+    print_matrix(matrix, rows, cols);
+
+    print_solutions(matrix, rows, cols);
+}
+
 int main() {
 	int luachon;
     do {
@@ -335,32 +358,7 @@ int main() {
                 inmatran(c, m, p);
                 break;
             case 2:
-                int rows, cols;
-
-                printf("Enter the number of rows: ");
-                scanf("%d", &rows);
-
-                printf("Enter the number of columns: ");
-                scanf("%d", &cols);
-
-                float matrix[rows][100];
-
-                printf("Enter the matrix elements:\n");
-                for (int i = 0; i < rows; i++) {
-                    for (int j = 0; j < cols; j++) {
-                        scanf("%f", &matrix[i][j]);
-                    }
-                }
-
-                printf("Original matrix:\n");
-                print_matrix(matrix, rows, cols);
-
-                reduce_to_echelon(matrix, rows, cols);
-
-                printf("Matrix in echelon form:\n");
-                print_matrix(matrix, rows, cols);
-
-                print_solutions(matrix, rows, cols);
+            call();
                 break;
             case 3:
                 matrannghichdao();
