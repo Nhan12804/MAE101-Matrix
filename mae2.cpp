@@ -65,7 +65,7 @@ void print_solutions(float matrix[][100], int rows, int cols) {
     }
 }
 
-int main() {
+int main(){
     int rows, cols;
 
     printf("Enter the number of rows: ");
